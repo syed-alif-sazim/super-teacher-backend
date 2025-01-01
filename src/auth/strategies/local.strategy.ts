@@ -12,16 +12,4 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       usernameField: "email",
     });
   }
-
-  async validate(username: string, password: string) {
-    const user = await this.authService.validateUser(username, password);
-
-    if (!user) {
-      throw new UnauthorizedException();
-    }
-
-    await this.authService.checkUserClaimByRole(user.userProfile.role.id);
-
-    return user;
-  }
 }

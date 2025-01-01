@@ -25,12 +25,4 @@ export class UsersController {
   me(@CurrentUser() user: ITokenizedUser): TokenizedUser {
     return user;
   }
-
-  @Post()
-  @UseGuards(RolesGuard)
-  @Roles(EUserRole.SUPER_USER)
-  async createUser(@Body() registerUserDto: RegisterUserDto): Promise<UserResponse> {
-    const newUser = await this.usersService.createOne(registerUserDto);
-    return this.usersSerializer.serialize(newUser);
-  }
 }
