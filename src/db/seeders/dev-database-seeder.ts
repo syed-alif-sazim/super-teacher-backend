@@ -12,7 +12,6 @@ import { EUserRole } from "@/common/enums/roles.enums";
 export class DevDatabaseSeeder extends Seeder {
   async run(em: EntityManager): Promise<void> {
     this.createRoles(em);
-    await this.createTestUser(em);
     await em.flush();
   }
 
@@ -21,19 +20,5 @@ export class DevDatabaseSeeder extends Seeder {
     const adminRole = new Role(EUserRole.ADMIN);
 
     em.persist([superUserRole, adminRole]);
-  }
-
-  async createTestUser(em: EntityManager) {
-    const email = "test@test.app";
-    const hashedPassword = await argon2.hash("test123", ARGON2_OPTIONS);
-
-    const user = new User(email, hashedPassword);
-
-    const userProfile = new UserProfile("Test", "User");
-    userProfile.role = em.getReference(Role, 1);
-
-    user.userProfile = userProfile;
-
-    em.persist(user);
   }
 }

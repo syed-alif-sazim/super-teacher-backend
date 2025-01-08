@@ -44,7 +44,6 @@ async function bootstrap() {
   }
 
   app.enableShutdownHooks();
-
   await app.listen(process.env.BE_PORT);
 }
 bootstrap();
