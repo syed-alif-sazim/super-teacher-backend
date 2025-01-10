@@ -1,5 +1,5 @@
 import { TokenizedUser } from "@/users/users.dtos";
-import { Type } from "class-transformer";
+import { Type } from "class-transformer"
 import {
   IsEmail,
   IsObject,

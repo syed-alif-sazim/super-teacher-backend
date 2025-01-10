@@ -24,10 +24,10 @@ export class User extends CustomBaseEntity {
   @PrimaryKey({ autoincrement: true })
   id!: number;
 
-  @Property()
+  @Property({fieldName:'first_name'})
   firstName!: string;
 
-  @Property()
+  @Property({fieldName:'last_name'})
   lastName!: string;
 
   @Property({ unique: true })

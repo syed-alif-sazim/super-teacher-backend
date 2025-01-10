@@ -3,6 +3,9 @@ import { EntityRepository } from "@mikro-orm/core";
 import { User } from "../common/entities/users.entity";
 import { Student } from "../common/entities/students.entity";
 import { CreateUserDto } from "@/auth/auth.dtos";
+import { EEducationLevel } from "@/common/enums/educationLevel.enums";
+import { EMedium } from "@/common/enums/medium.enums";
+import { EDegree } from "@/common/enums/degree.enums";
 
 @Injectable()
 export class UsersRepository extends EntityRepository<User> {
@@ -33,7 +36,7 @@ export class UsersRepository extends EntityRepository<User> {
     student.medium = medium;
     student.grade = grade;
     student.degree = degree;
-    student.degreeName = degreeName;
+    student.degreeName = degreeName; 
     student.semesterYear = semesterYear;
     student.user = user;
     await this.em.persist([user, student]);

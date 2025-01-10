@@ -28,25 +28,26 @@ export class Student extends CustomBaseEntity {
   @Property()
   address!: string;
 
-  @Property()
+  @Property({fieldName: "phone_number"})
   phoneNumber!: string;
 
   @Enum(() => EEducationLevel)
+  @Property({fieldName: "education_level"})
   educationLevel!: EEducationLevel;
 
-  @Enum(() => EMedium)
+  @Enum({items: Object.values(EMedium), nullable: true})
   medium!: EMedium | null;
 
-  @Property({ nullable: true })
+  @Property({nullable: true})
   grade!: string | null;
 
-  @Enum(() => EDegree)
+  @Enum({items: Object.values(EDegree), nullable: true})
   degree!: EDegree | null;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, fieldName: "degree_name"})
   degreeName!: string | null;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, fieldName: "semester_year"})
   semesterYear!: string | null;
 
   @OneToOne(() => User, { nullable: false })
