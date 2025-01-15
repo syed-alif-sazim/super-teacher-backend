@@ -6,6 +6,7 @@ import { CreateUserDto } from "@/auth/auth.dtos";
 import { EEducationLevel } from "@/common/enums/educationLevel.enums";
 import { EMedium } from "@/common/enums/medium.enums";
 import { EDegree } from "@/common/enums/degree.enums";
+import { Teacher } from "@/common/entities/teachers.entity";
 
 @Injectable()
 export class UsersRepository extends EntityRepository<User> {
@@ -40,6 +41,30 @@ export class UsersRepository extends EntityRepository<User> {
     student.semesterYear = semesterYear;
     student.user = user;
     await this.em.persist([user, student]);
+    this.em.flush();
+  }
+
+  async createTeacherUser(createUserDto: CreateUserDto) {
+    const { firstName, lastName, email, password, gender, role, teacherForm } = createUserDto;
+    const {
+      highestEducationLevel,
+      majorSubject, 
+      subjectsToTeach
+    } = teacherForm;
+
+    const user = new User();
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.password = password;
+    user.gender = gender;
+    user.role = role;
+    const teacher = new Teacher();
+    teacher.highestEducationLevel = highestEducationLevel
+    teacher.majorSubject = majorSubject 
+    teacher.subjectsToTeach = subjectsToTeach
+    teacher.user = user;
+    await this.em.persist([user, teacher]);
     this.em.flush();
   }
 

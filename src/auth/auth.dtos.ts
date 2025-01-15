@@ -10,12 +10,14 @@ import {
   MinLength,
   ValidateIf,
   ValidateNested,
+  IsArray
 } from "class-validator";
 import { EEducationLevel } from "../common/enums/educationLevel.enums";
 import { EMedium } from "../common/enums/medium.enums";
 import { EDegree } from "../common/enums/degree.enums";
 import { ERoles } from "../common/enums/roles.enums";
 import { EGender } from "../common/enums/gender.enums";
+import { EHighestEducationLevel } from "@/common/enums/highestEducationLevel.enums";
 import { ITokenizedUser } from "@/auth/auth.interfaces";
 import { UserProfile } from "@/common/entities/user-profiles.entity";
 import { User } from "@/common/entities/users.entity";
@@ -63,7 +65,19 @@ export class CreateStudentDto {
   @IsString()
   semesterYear!: string;
 }
+export class CreateTeacherDto {
+  @IsString()
+  code!: string;
 
+  @IsEnum(EHighestEducationLevel)
+  highestEducationLevel!: EHighestEducationLevel;
+
+  @IsString()
+  majorSubject!: string;
+
+  @IsArray()
+  subjectsToTeach!: Array<string>;
+}
 export class CreateUserDto {
   @IsString()
   firstName!: string;
@@ -88,4 +102,10 @@ export class CreateUserDto {
   @Type(() => CreateStudentDto)
   @IsOptional()
   studentForm!: CreateStudentDto;
+
+  @ValidateIf((obj) => obj.role === ERoles.Teacher)
+  @ValidateNested()
+  @Type(() => CreateTeacherDto)
+  @IsOptional()
+  teacherForm!: CreateTeacherDto;
 }

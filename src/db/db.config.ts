@@ -46,7 +46,7 @@ const ormConfig = defineConfig({
     tableName: "mikro_orm_migrations",
     path: "./dist/db/migrations",
     pathTs: "./src/db/migrations",
-    glob: "Migration20250109142842_student_and_user.ts",
+    glob: "*.ts",
     transactional: true,
     disableForeignKeys: false,
     allOrNothing: true,
@@ -67,7 +67,7 @@ const ormConfig = defineConfig({
   seeder: {
     path: "./dist/db/seeders",
     pathTs: "./src/db/seeders",
-    glob: "!(*.d).{js,ts}",
+    glob: "*.ts",
     emit: "js",
     fileName: (className: string) => className,
   },
