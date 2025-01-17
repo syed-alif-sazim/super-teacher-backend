@@ -22,4 +22,19 @@ export class UsersService {
   private hashPassword(password: string) {
     return argon2.hash(password, ARGON2_OPTIONS);
   }
+
+  async findByIdOrThrow(id: number) {
+    const user = await this.usersRepository.findOneOrFail(id);
+
+    await this.entityManager.populate(user, user.role === 'student' ? ['student', 'student.id'] : user.role === 'teacher' ? ['teacher', 'teacher.id'] : []);
+    return user;
+  }
+
+  async findByEmailOrThrow(email: string) {
+    const user = await this.usersRepository.findOneOrFail({ email });
+
+    await this.entityManager.populate(user, user.role === 'student' ? ['student', 'student.id'] : user.role === 'teacher' ? ['teacher', 'teacher.id'] : []);
+    
+    return user;
+  }
 }

@@ -62,9 +62,8 @@ export class UserProfileResponse {
 }
 
 export class TokenizedUser implements ITokenizedUser {
-  id!: number;
-  claimId!: number;
-  claim!: EUserRole;
-  userProfileId!: number;
-  email!: string;
+  userId!: number;  
+  email!: string; 
+  role!: string;
+  roleId!: number | null;
 }

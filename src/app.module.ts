@@ -15,6 +15,7 @@ import { RolesModule } from "./roles/roles.module";
 import { UserProfilesModule } from "./user-profiles/user-profiles.module";
 import { UsersModule } from "./users/users.module";
 import { WebsocketExampleModule } from "./websocket-example/websocket-example.module";
+import { JwtModule } from "@nestjs/jwt";
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { WebsocketExampleModule } from "./websocket-example/websocket-example.mo
     WebsocketExampleModule,
     UserProfilesModule,
     HealthModule,
+    JwtModule
   ],
   controllers: [],
   providers: [Logger],

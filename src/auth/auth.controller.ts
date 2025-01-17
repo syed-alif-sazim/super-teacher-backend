@@ -7,6 +7,7 @@ import { CreateUserDto, LoginResponseDto } from "./auth.dtos";
 import { AuthService } from "./auth.service";
 import { CurrentUser } from "./decorators/current-user.decorator";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
+import { makeTokenizedUser } from "./auth.helpers";
 
 @Controller("auth")
 export class AuthController {
@@ -18,5 +19,17 @@ export class AuthController {
 
     return res;
 
+  }
+
+  @UseGuards(LocalAuthGuard)
+  @UseInterceptors(ResponseTransformInterceptor)
+  @Post("login")
+  async login(@CurrentUser() user: User): Promise<LoginResponseDto> {
+    const accessToken = await this.authService.createAccessToken(user);
+    console.log('acces token',accessToken)
+    return {
+      accessToken,
+      user: makeTokenizedUser(user),
+    };
   }
 }

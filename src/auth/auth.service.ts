@@ -72,4 +72,38 @@ export class AuthService {
     }
     return { message: "User registered successfully" };
   }
+  async validateUser(email: string, password: string) {
+    const user = await this.usersService.findByEmailOrThrow(email);
+
+    const verified = await argon2.verify(user.password as string, password, ARGON2_OPTIONS);
+    if (!verified) throw new UnauthorizedException(INVALID_USER_CREDENTIALS);
+
+    if (!user) throw new UnauthorizedException(INVALID_USER_CREDENTIALS);
+
+    return user;
+  }
+
+  checkUserExists(id: number) {
+    return this.usersService.findByIdOrThrow(id);
+  }
+
+  checkUserClaimByRole(claimId: number) {
+    return this.rolesService.findByIdOrThrow(claimId);
+  }
+
+  async createAccessToken(loggedInUser: User): Promise<string> {
+    const user = await this.usersService.findByEmailOrThrow(loggedInUser.email);
+
+    if (!user) throw new UnauthorizedException(INVALID_USER_CREDENTIALS);
+
+    const payload: IJwtPayload = {
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      roleId: user.role === 'student' ? user.student.id : user.role === 'teacher' ? user.teacher.id : null
+    };
+
+    const accessToken = await this.jwtService.signAsync(payload);
+    return accessToken;
+  }
 }

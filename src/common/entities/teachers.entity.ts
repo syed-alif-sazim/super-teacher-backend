@@ -35,6 +35,6 @@ export class Teacher extends CustomBaseEntity {
   @Property({ fieldName: "subjects_to_teach" })
   subjectsToTeach!: Array<string>;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, { nullable: false })
   user!: Rel<User>;
 }
