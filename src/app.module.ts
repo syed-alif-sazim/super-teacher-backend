@@ -38,7 +38,7 @@ import { JwtModule } from "@nestjs/jwt";
     WebsocketExampleModule,
     UserProfilesModule,
     HealthModule,
-    JwtModule
+    JwtModule,
   ],
   controllers: [],
   providers: [Logger],

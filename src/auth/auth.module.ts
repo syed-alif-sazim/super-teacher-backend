@@ -10,6 +10,7 @@ import { AuthService } from "./auth.service";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { LocalStrategy } from "./strategies/local.strategy";
 import { UniqueCodeModule } from "@/unique-code/unique-code.module";
+import { OtpModule } from "@/otp/otp.module";
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { UniqueCodeModule } from "@/unique-code/unique-code.module";
     }),
     UsersModule,
     RolesModule,
-    UniqueCodeModule
+    UniqueCodeModule,
+    OtpModule
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
