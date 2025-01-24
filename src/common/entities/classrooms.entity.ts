@@ -18,16 +18,16 @@ import { ClassroomsRepository } from "@/classrooms/classrooms.repository";
 export class Classroom extends CustomBaseEntity {
   [EntityRepositoryType]?: ClassroomsRepository;
 
-  @PrimaryKey({ autoincrement: true })
+  @PrimaryKey({ autoincrement: true, fieldName: "id" })
   id!: number;
 
-  @Property()
+  @Property({ fieldName: "title" })
   title!: string;
 
-  @Property()
+  @Property({ fieldName: "subject" })
   subject!: string;
 
-  @Property()
+  @Property({ fieldName: "days" })
   days!: string[];
 
   @Property({ fieldName: "class_time" })
@@ -36,6 +36,6 @@ export class Classroom extends CustomBaseEntity {
   @Property({ fieldName: "meet_link", nullable: true })
   meetLink?: string;
 
-  @ManyToOne(() => Teacher)
+  @ManyToOne(() => Teacher, { fieldName: "teacher_id" })
   teacher!: Rel<Teacher>;
 }

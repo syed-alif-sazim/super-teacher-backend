@@ -23,4 +23,12 @@ export class ClassroomsController {
 
     return res;
   }
+
+  @Get()
+  getClassrooms(@CurrentUser() user: ITokenizedUser) {
+    if (user.roleId === null) {
+      throw new BadRequestException('ID cannot be null');
+    }
+    return this.classroomsService.getClassrooms(user.userId, user.role);
+  }
 }
