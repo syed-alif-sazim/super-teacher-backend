@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20250117133017_modify_users extends Migration {
+export class Migration20250117133017_add_teacher_relation_in_users extends Migration {
 
   async up(): Promise<void> {
     this.addSql('create table "users" ("id" serial primary key, "created_at" timestamptz not null, "updated_at" timestamptz not null, "first_name" varchar(255) not null, "last_name" varchar(255) not null, "email" varchar(255) not null, "password" varchar(255) not null, "gender" text check ("gender" in (\'Male\', \'Female\')) not null, "role" text check ("role" in (\'student\', \'teacher\')) not null);');

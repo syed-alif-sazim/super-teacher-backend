@@ -111,7 +111,8 @@ export class AuthService {
     const {email, password} = resetPasswordDto;
     const user = await this.usersRepository.findOne({ email });
     if (!user) {
-      throw new BadRequestException('User not found');
+      console.log('User not found')
+      return
     }
 
     const hashedPassword = await this.usersService.hashPassword(password);
