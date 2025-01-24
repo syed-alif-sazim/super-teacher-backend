@@ -16,6 +16,8 @@ import { UserProfilesModule } from "./user-profiles/user-profiles.module";
 import { UsersModule } from "./users/users.module";
 import { WebsocketExampleModule } from "./websocket-example/websocket-example.module";
 import { JwtModule } from "@nestjs/jwt";
+import { UniqueCodeModule } from "./unique-code/unique-code.module";
+import { ClassroomsModule } from './classrooms/classrooms.module';
 
 @Module({
   imports: [
@@ -35,10 +37,11 @@ import { JwtModule } from "@nestjs/jwt";
     AuthModule,
     RolesModule,
     FileUploadsModule,
-    WebsocketExampleModule,
     UserProfilesModule,
     HealthModule,
     JwtModule,
+    UniqueCodeModule,
+    ClassroomsModule
   ],
   controllers: [],
   providers: [Logger],
