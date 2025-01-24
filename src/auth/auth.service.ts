@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, ConflictException } from "@nestjs/common";
+import { Injectable, UnauthorizedException, ConflictException, BadRequestException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 
 import * as argon2 from "argon2";
@@ -11,7 +11,7 @@ import { UsersService } from "@/users/users.service";
 import { INVALID_USER_CREDENTIALS } from "./auth.constants";
 import { IJwtPayload } from "./auth.interfaces";
 import { UsersRepository } from "@/users/users.repository";
-import { CreateUserDto } from "./auth.dtos";
+import { CreateUserDto, ResetPasswordDto } from "./auth.dtos";
 import { ERoles } from "@/common/enums/roles.enums";
 import { InjectEntityManager } from "@mikro-orm/nestjs";
 import { EntityManager } from "@mikro-orm/core";
@@ -106,4 +106,19 @@ export class AuthService {
     const accessToken = await this.jwtService.signAsync(payload);
     return accessToken;
   }
+
+  async resetPassword(resetPasswordDto : ResetPasswordDto): Promise<void> {
+    const {email, password} = resetPasswordDto;
+    const user = await this.usersRepository.findOne({ email });
+    if (!user) {
+      console.log('User not found')
+      return
+    }
+
+    const hashedPassword = await this.usersService.hashPassword(password);
+    user.password = hashedPassword;
+
+    await this.usersRepository.getEntityManager().persistAndFlush(user);
+  }
+
 }

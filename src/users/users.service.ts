@@ -19,7 +19,7 @@ export class UsersService {
     private readonly rolesRepository: RolesRepository,
   ) {}
 
-  private hashPassword(password: string) {
+  hashPassword(password: string) {
     return argon2.hash(password, ARGON2_OPTIONS);
   }
 
@@ -37,4 +37,13 @@ export class UsersService {
     
     return user;
   }
+
+  async checkIfEmailExists(email: string) {
+    const user = await this.usersRepository.findOne({ email })
+    if(!user){
+      return false
+    }
+    return true
+  }
+  
 }
