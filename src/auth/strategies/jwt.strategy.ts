@@ -16,4 +16,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: process.env.JWT_SECRET,
     });
   }
+  async validate(payload: IJwtPayload): Promise<ITokenizedUser> {
+    const user = await this.authService.checkUserExists(payload.userId);
+
+    if (!user) throw new UnauthorizedException("User not found");
+
+    return {
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      roleId: user.role === 'student' ? user.student.id : user.role === 'teacher' ? user.teacher.id : null
+    };
+  }
 }

@@ -1,14 +1,15 @@
 import { EUserRole } from "@/common/enums/roles.enums";
 
 export interface IJwtPayload {
-  sub: number;
-  email: string;
-  claimId: number;
+  userId: number;  
+  email: string; 
+  role: string;
+  roleId : number | null;
 }
 
 export interface ITokenizedUser extends Omit<IJwtPayload, "sub"> {
-  id: number;
-  claimId: number;
-  claim: EUserRole;
-  userProfileId: number;
+  userId: number;  
+  email: string; 
+  role: string;
+  roleId : number | null;
 }
