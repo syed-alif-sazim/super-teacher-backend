@@ -109,3 +109,21 @@ export class CreateUserDto {
   @IsOptional()
   teacherForm!: CreateTeacherDto;
 }
+
+export class VerifyOtpDto {
+  @IsEmail()
+  email!: string;
+
+  @IsString()
+  code!: string;
+}
+
+export class ResetPasswordDto {
+  @IsEmail()
+  email!: string;
+
+  @IsString()
+  password!: string;
+}
+
+

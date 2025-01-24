@@ -39,6 +39,12 @@ class EnvironmentVariables implements IEnvironmentVariables {
   @IsNumber()
   @IsPositive()
   AWS_S3_PRESIGN_URL_EXPIRY_IN_MINUTES!: number;
+
+  @IsString()
+  SENDGRID_API_KEY!: string;
+
+  @IsString()
+  SENDGRID_EMAIL!: string;
 }
 
 export function validate(config: Record<string, unknown>) {

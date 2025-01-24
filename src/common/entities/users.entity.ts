@@ -12,6 +12,7 @@ import { ERoles } from "../enums/roles.enums";
 import { EGender } from "../enums/gender.enums";
 import { UsersRepository } from "@/users/users.repository";
 import { CustomBaseEntity } from "./custom-base.entity";
+import { Teacher } from "./teachers.entity";
 
 @Entity({
   tableName: "users",
@@ -44,4 +45,8 @@ export class User extends CustomBaseEntity {
 
   @OneToOne(() => Student, { mappedBy: (student) => student.user })
   student!: Rel<Student>;
+
+  @OneToOne(() => Teacher, { mappedBy: (teacher) => teacher.user })
+  teacher!: Rel<Teacher>;
+
 }
