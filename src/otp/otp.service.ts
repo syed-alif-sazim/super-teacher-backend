@@ -24,7 +24,7 @@ export class OtpService {
 
       const msg = {
         to: email,
-        from: 'syed.alif@sazim.io',
+        from: process.env.SENDGRID_EMAIL,
         subject: 'Your OTP Code',
         text: `Your OTP code is ${otpCode}. It will expire in 10 minutes.`,
         html: `<p>Your OTP code is <strong>${otpCode}</strong>. It will expire in 10 minutes.</p>`,

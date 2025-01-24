@@ -26,4 +26,15 @@ export class ClassroomsService {
 
     return classroom;
    }
+
+   async getClassrooms(userId: number, userRole: string) {
+    let classrooms: Classroom[] = [];
+  
+    const user = await this.usersRepository.findOneOrFail({ id: userId });
+    
+    if (userRole === EUserRole.Teacher) {
+      classrooms = await this.classroomsRepository.find({ teacher: user.teacher });
+    }
+    return classrooms;
+  }
 }
