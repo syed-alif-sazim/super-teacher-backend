@@ -63,7 +63,7 @@ export class ClassroomsService {
     students.map(student => {
       this.emailService.sendEmail({
         to: student.user.email,
-        from: process.env.SENDGRID_EMAIL,
+        from: process.env.SENDGRID_EMAIL!,
         subject: `Enrollment in ${classroom.title} class`,
         text: `You have been added in the ${classroom.title} classroom in superteacher.`,
       });

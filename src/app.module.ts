@@ -18,6 +18,8 @@ import { WebsocketExampleModule } from "./websocket-example/websocket-example.mo
 import { JwtModule } from "@nestjs/jwt";
 import { UniqueCodeModule } from "./unique-code/unique-code.module";
 import { ClassroomsModule } from './classrooms/classrooms.module';
+import { MaterialsModule } from "./materials/materials.module";
+import { EmailModule } from "./email/email.module";
 
 @Module({
   imports: [
@@ -41,7 +43,9 @@ import { ClassroomsModule } from './classrooms/classrooms.module';
     HealthModule,
     JwtModule,
     UniqueCodeModule,
-    ClassroomsModule
+    ClassroomsModule,
+    MaterialsModule,
+    EmailModule
   ],
   controllers: [],
   providers: [Logger],
