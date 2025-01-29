@@ -26,4 +26,8 @@ export class CreateClassroomDto {
   classTime!: Date;
 }
 
+export class AddStudentsDto {
+  @IsArray()
+  students!: number[];
+}
 
