@@ -5,11 +5,14 @@ import { MikroOrmModule } from "@mikro-orm/nestjs";
 import { ClassroomsService } from "./classrooms.service";
 import { ClassroomsController } from "./classrooms.controller";
 import { User } from "@/common/entities/users.entity";
+import { StudentClassroom } from "@/common/entities/students-classrooms.entity";
+import { EmailService } from "@/email/email.service";
+import { Student } from "@/common/entities/students.entity";
 
 @Module({
-  imports: [MikroOrmModule.forFeature([Classroom, Teacher, User])],
+  imports: [MikroOrmModule.forFeature([Classroom, Teacher, User, StudentClassroom, Student])],
   controllers: [ClassroomsController],
-  providers: [ClassroomsService],
+  providers: [ClassroomsService, EmailService],
   exports: [ClassroomsService]
 })
 export class ClassroomsModule  {}
