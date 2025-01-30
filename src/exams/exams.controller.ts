@@ -1,30 +1,30 @@
 import { Body, Controller, Post, UseGuards, UseInterceptors, BadRequestException, Get, Param, Delete, UploadedFile } from "@nestjs/common";
 import { ResponseTransformInterceptor } from "@/common/interceptors/response-transform.interceptor";
 import { JwtAuthGuard } from "@/auth/guards/jwt-auth.guard";
-import { AddMaterialDto } from "./materials.dtos";
-import { MaterialsService } from "./materials.service";
+import { AddExamDto } from "./exams.dtos";
+import { ExamsService } from "./exams.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 
 @UseInterceptors(ResponseTransformInterceptor)
 @UseGuards(JwtAuthGuard)
 @Controller("classrooms")
-export class MaterialsController {
+export class ExamsController {
   constructor(
-    private readonly materialsService: MaterialsService,
+    private readonly examsService: ExamsService,
   ) {}
 
-  @Post(':id/materials')
+  @Post(':id/exams')
   @UseInterceptors(FileInterceptor("file"))
-  async addMaterial(
+  async addExam(
     @Param("id") classroomId: number,
-    @Body() addMaterialDto: AddMaterialDto,
+    @Body() addExamDto: AddExamDto,
     @UploadedFile() file: Express.Multer.File){
-        return this.materialsService.addMaterial(classroomId, addMaterialDto, file)
+        return this.examsService.addExam(classroomId, addExamDto, file)
   }
 
-  @Get(':id/materials')
-  async getAllMaterials(@Param("id") classroomId: number){
-      return this.materialsService.getAllMaterials(classroomId)
+  @Get(':id/exams')
+  async getAllExams(@Param("id") classroomId: number){
+      return this.examsService.getAllExams(classroomId)
   }
 
 }

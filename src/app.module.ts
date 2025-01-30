@@ -20,6 +20,7 @@ import { UniqueCodeModule } from "./unique-code/unique-code.module";
 import { ClassroomsModule } from './classrooms/classrooms.module';
 import { MaterialsModule } from "./materials/materials.module";
 import { EmailModule } from "./email/email.module";
+import { ExamsModule } from "./exams/exams.module";
 
 @Module({
   imports: [
@@ -45,7 +46,8 @@ import { EmailModule } from "./email/email.module";
     UniqueCodeModule,
     ClassroomsModule,
     MaterialsModule,
-    EmailModule
+    EmailModule,
+    ExamsModule
   ],
   controllers: [],
   providers: [Logger],

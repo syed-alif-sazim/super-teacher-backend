@@ -46,7 +46,7 @@ const ormConfig = defineConfig({
     tableName: "mikro_orm_migrations",
     path: "./dist/db/migrations",
     pathTs: "./src/db/migrations",
-    glob: "*.ts",
+    glob: "Migration20250130102447_add_exams.ts",
     transactional: true,
     disableForeignKeys: false,
     allOrNothing: true,
